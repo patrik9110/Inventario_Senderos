@@ -23,7 +23,7 @@ def agregarItem():
             elif accion2.upper() == "CA":
                 inicio()
         if itemChecker != itemNuevo:
-            iItem.write(itemNuevo)
+            iItem.append(itemNuevo)
             cantidadNueva = input("Cuantas unidades? ")
             int(iCantidad[itemNuevo.index()]) + int(cantidadNueva)
             nuevoItemVentaSS = input("A cuanto se vende? ")
