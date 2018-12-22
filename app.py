@@ -5,7 +5,7 @@ def main():
 
     print("Bienvenido/a")
 
-    accion = input("Que queres hacer? \n[C]ompra \n[V]enta \n[E]ditar \n.. ")
+    accion = input("Que queres hacer? \n[C]ompra \n[V]enta \n[E]ditar \n[M]irar \n.. ")
 
 
     iItem, iCantidad, iPrecioVenta = np.loadtxt("inventario.csv", delimiter = ",", unpack = True, dtype = "str")
