@@ -1,15 +1,18 @@
-import numpy as np
-import csv
+from openpyxl import load_workbook
+import os
 
-def main():
+wb1 = load_workbook("INVENTARIO.xlsx")
+wb2 = load_workbook("VENTAS.xlsx")
+inventario = wb1["Hoja 1"]
+ventas = wb2["Hoja 1"]
+print(ventas["A2"].value)
+
+''''def main():
 
     print("Bienvenido/a")
 
     accion = input("Que queres hacer? \n[C]ompra \n[V]enta \n[E]ditar \n[M]irar \n.. ")
 
-
-    iItem, iCantidad, iPrecioVenta = np.loadtxt("inventario.csv", delimiter = ",", unpack = True, dtype = "str")
-    vItem, vCantidadVendida, vTotalSS  = np.loadtxt("ventas.csv", delimiter = ",", unpack = True, dtype = "str")
 
     def agregarItem():
         itemNuevo = input("Item Nuevo: ")
@@ -37,3 +40,4 @@ def main():
         agregarItem()
 
 main()
+'''
