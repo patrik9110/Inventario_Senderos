@@ -7,6 +7,7 @@ inventario = wb1["Hoja 1"]
 ventas = wb2["Hoja 1"]
 
 
+
 def main():
 
     print("Bienvenido/a")
@@ -52,16 +53,23 @@ def main():
                 wb1.save("INVENTARIO.xlsx")
                 quit()
 
+        def esta():
+            rowCounter = 1
+            for itemChecker in inventario["A"]:
+                if itemChecker.value == itemNuevo:
+                    si_esta = True
+                if itemChecker != itemNuevo:
+                    si_esta = False
+                rowCounter += 1
+
         itemNuevo = input("Item Nuevo: ")
         itemChecker = " "
-        for itemChecker in inventario["A"]:
-            rowCounter = 1
-            if itemChecker.value == itemNuevo:
-                usado()
-            if itemChecker != itemNuevo:
-                nuevo()
-            rowCounter += 1
-
+        si_esta = False
+        esta()
+        if si_esta == False:
+            nuevo()
+        if si_esta == True:
+            usado()
 
     if accion.upper() == "C":
         agregarItem()
