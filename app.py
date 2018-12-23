@@ -41,7 +41,7 @@ def main():
             precioNuevo = input("A cuanto se va a vender? ")
             inventario["C"+str(colLen)] = precioNuevo
             print(itemNuevo + " agregado al inventario!")
-            sigue2 = input("Algo mas para agregar al inventario? \n[Si] \n[I]nicio \n[S]alir")
+            sigue2 = input("Algo mas para agregar al inventario? \n[Si] \n[I]nicio \n[S]alir \n..")
             if sigue2.upper() == "SI":
                 wb1.save("INVENTARIO.xlsx")
                 agregarItem()
