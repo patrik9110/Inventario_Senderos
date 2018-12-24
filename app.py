@@ -17,15 +17,15 @@ def main():
     def agregarItem():
 
         def usado():
-            print(itemChecker.value + " ya esta en el inventario, que desea hacer: ")
-            accion2 = input("[R]eintentar \n[A]gregar mas unidades de " + itemChecker.value + "\n[I]nicio \n[S]alir \n.. ")
+            print(itemNuevo + " ya esta en el inventario, que desea hacer: ")
+            accion2 = input("[R]eintentar \n[A]gregar mas unidades de " + itemNuevo + "\n[I]nicio \n[S]alir \n.. ")
             if accion2.upper() == "R":
                 agregarItem()
             elif accion2.upper() == "A":
-                masUnidades = input("Cuantas nuevas unidades nuevas hay de " + itemChecker.value + "? ")
-                precioProducto = inventario["B"+str(rowCounter)]
-                inventario["B"+str(rowCounter)] = int(masUnidades) + int(precioProducto.value)
-                print("Se actualizo la cantidad de " + itemChecker.value + " a " + str(inventario["B"+str(rowCounter)].value))
+                masUnidades = input("Cuantas nuevas unidades nuevas hay de " + itemNuevo + "? ")
+                precioProducto = inventario["B"+str(int(checkCol.index(itemNuevo)+1))]
+                inventario["B"+str(int(checkCol.index(itemNuevo)+1))] = int(masUnidades) + int(precioProducto.value)
+                print("Se actualizo la cantidad de " + itemNuevo + " a " + str(inventario["B"+str(int(checkCol.index(itemNuevo)+1))].value))
                 main()
             elif accion2.upper() == "I":
                 main()
@@ -52,17 +52,19 @@ def main():
                 wb1.save("INVENTARIO.xlsx")
                 quit()
 
+        def esta():
+            for itemChecker in inventario["A"]:
+                checkCol.append(itemChecker.value)
+            if itemNuevo in checkCol:
+                usado()
+            elif itemNuevo not in checkCol:
+                nuevo()
+
         itemNuevo = input("Item Nuevo: ")
         itemChecker = " "
-        rowCounter = 1
         itemChecker = " "
-        for itemChecker in inventario["A"]:
-            if itemChecker.value == itemNuevo:
-                usado()
-                break
-            if itemChecker.value != itemNuevo:
-                nuevo()
-            rowCounter += 1
+        checkCol = []
+        esta()
 
     if accion.upper() == "C":
         agregarItem()
