@@ -3,8 +3,8 @@ import os
 
 wb1 = load_workbook("INVENTARIO.xlsx")
 wb2 = load_workbook("VENTAS.xlsx")
-inventario = wb1["Hoja 1"]
-ventas = wb2["Hoja 1"]
+inventario = wb1["Hoja 1"] #A=Item B=Cantidad C=Precio de Venta por Unidad
+ventas = wb2["Hoja 1"] #A=Item B=Cantidad Vendida C=Precio Unitario D=Total$ Vendida
 
 
 def main():
@@ -12,7 +12,9 @@ def main():
     print("Bienvenido/a")
 
     accion = input("Que queres hacer? \n[C]ompra \n[V]enta \n[E]ditar \n[M]irar \n[S]alir \n.. ")
-
+    checkCol = []
+    for itemChecker in inventario["A"]:
+        checkCol.append(itemChecker.value)
 
     def agregarItem():
 
@@ -53,8 +55,6 @@ def main():
                 quit()
 
         def esta():
-            for itemChecker in inventario["A"]:
-                checkCol.append(itemChecker.value)
             if itemNuevo in checkCol:
                 usado()
             elif itemNuevo not in checkCol:
@@ -63,11 +63,28 @@ def main():
         itemNuevo = input("Item Nuevo: ")
         itemChecker = " "
         itemChecker = " "
-        checkCol = []
         esta()
+
+    def venderItem():
+        itemVendido = input("Que producto se vendio? ")
+        def IVusado():
+            unidadesVendidas = input("Cuantas unidades se vendieron? ")
+            cantidadProductoVentas = ventas["B"+str(int(checkCol2.index(itemVendido)+1))]
+            ventas["B"+str(int(checkCol2.index(itemVendido)+1))] = int(unidadesVendidas) + int(cantidadProductoVentas.value)
+            ventas["D"+str(int(checkCol2.index(itemVendido)+1))] = int(ventas["B"+str(int(checkCol2.index(itemVendido)+1))]) * int(ventas["C"+str(int(checkCol2.index(itemVendido)+1))])
+        def IVesta():
+            for itemChecker2 in ventas["A"]:
+                checkCol2.append(itemChecker2.value)
+            if itemVendido in checkCol2:
+                IVusado()
+            elif itemNuevo not in checkCol2:
+                IVnuevo()
 
     if accion.upper() == "C":
         agregarItem()
+
+    if accion.upper() == "V":
+        venderItem()
 
     if accion.upper() == "S":
         quit()
