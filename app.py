@@ -62,23 +62,48 @@ def main():
 
         itemNuevo = input("Item Nuevo: ")
         itemChecker = " "
-        itemChecker = " "
         esta()
 
+    checkCol2 = []
+    for itemChecker2 in ventas["A"]:
+        checkCol2.append(itemChecker2.value)
+
     def venderItem():
-        itemVendido = input("Que producto se vendio? ")
+
+        def inventario_en_cero():
+            if int(inventario["B"+str(int(checkCol.index(itemVendido)+1))].value) == 0 or int(inventario["B"+str(int(checkCol.index(itemVendido)+1))].value) < 0:
+                print("No hay mas unidades de " + itemVendido + " en el inventario!")
+
         def IVusado():
             unidadesVendidas = input("Cuantas unidades se vendieron? ")
             cantidadProductoVentas = ventas["B"+str(int(checkCol2.index(itemVendido)+1))]
             ventas["B"+str(int(checkCol2.index(itemVendido)+1))] = int(unidadesVendidas) + int(cantidadProductoVentas.value)
-            ventas["D"+str(int(checkCol2.index(itemVendido)+1))] = int(ventas["B"+str(int(checkCol2.index(itemVendido)+1))]) * int(ventas["C"+str(int(checkCol2.index(itemVendido)+1))])
+            ventas["D"+str(int(checkCol2.index(itemVendido)+1))] = int(ventas["B"+str(int(checkCol2.index(itemVendido)+1))].value) * int(ventas["C"+str(int(checkCol2.index(itemVendido)+1))].value)
+            inventario["B"+str(int(checkCol.index(itemVendido)+1))] = str(int(inventario["B"+str(checkCol.index(itemVendido)+1)].value) - int(unidadesVendidas))
+            print("Se vendio: " + str(unidadesVendidas) + " unidades de " + itemVendido + ". \nCantidad vendida total: " + str(ventas["B"+str(int(checkCol2.index(itemVendido)+1))].value) + " \nPesos totales ganados: " + str(ventas["D"+str(int(checkCol2.index(itemVendido)+1))].value))
+            inventario_en_cero()
+
+        def IVnuevo():
+            colLen2 = 1
+            for f in ventas["A"]:
+                colLen2 += 1
+            cantidadNuevaVentas = input("Cuantas unidades se vendieron? ")
+            ventas["A"+str(colLen2)] = itemVendido
+            ventas["B"+str(colLen2)] = cantidadNuevaVentas
+            ventas["C"+str(colLen2)] = inventario["C"+str(int(checkCol.index(itemVendido)+1))].value
+            ventas["D"+str(colLen2)] = int(ventas["B"+str(colLen2)].value) * int(ventas["C"+str(colLen2)].value)
+            inventario["B"+str(int(checkCol.index(itemVendido)+1))] = str(int(inventario["B"+str(int(checkCol.index(itemVendido)+1))].value) - int(cantidadNuevaVentas))
+            print(itemVendido + " fue vendido \nCantidad vendida total: " + str(ventas["B"+str(colLen2)].value) + "\nPesos totales: " + str(ventas["D"+str(colLen2)].value))
+            inventario_en_cero()
+
         def IVesta():
-            for itemChecker2 in ventas["A"]:
-                checkCol2.append(itemChecker2.value)
             if itemVendido in checkCol2:
                 IVusado()
-            elif itemNuevo not in checkCol2:
+            elif itemVendido not in checkCol2:
                 IVnuevo()
+
+        itemVendido = input("Que producto se vendio? ")
+        IVesta()
 
     if accion.upper() == "C":
         agregarItem()
