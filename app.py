@@ -80,7 +80,7 @@ def main():
             ventas["B"+str(int(checkCol2.index(itemVendido)+1))] = int(unidadesVendidas) + int(cantidadProductoVentas.value)
             ventas["D"+str(int(checkCol2.index(itemVendido)+1))] = int(ventas["B"+str(int(checkCol2.index(itemVendido)+1))].value) * int(ventas["C"+str(int(checkCol2.index(itemVendido)+1))].value)
             inventario["B"+str(int(checkCol.index(itemVendido)+1))] = str(int(inventario["B"+str(checkCol.index(itemVendido)+1)].value) - int(unidadesVendidas))
-            print("Se vendio: " + str(unidadesVendidas) + " unidades de " + itemVendido + ". \nCantidad vendida total: " + str(ventas["B"+str(int(checkCol2.index(itemVendido)+1))].value) + " \nPesos totales ganados: " + str(ventas["D"+str(int(checkCol2.index(itemVendido)+1))].value))
+            print("Se vendio: " + str(unidadesVendidas) + " unidades de " + itemVendido + ". \nCantidad vendida total: " + str(ventas["B"+str(int(checkCol2.index(itemVendido)+1))].value) + " \nPesos totales ganados: " + str(ventas["D"+str(int(checkCol2.index(itemVendido)+1))].value) + " \nCantidad restante en inventario: " + str(inventario["B"+str(int(checkCol.index(itemVendido)+1))].value))
             inventario_en_cero()
 
         def IVnuevo():
